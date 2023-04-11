@@ -6,7 +6,7 @@
 
 
 WITH stage_prep AS (
-SELECT * FROM nc_trailers.blackpurl_production.technician_performance_stage as s
+SELECT * FROM {{ source('blackpurl_production', 'technician_performance_stage') }} as s
 WHERE s.TECHNICIAN is not null),
 
 prod_prep AS (
