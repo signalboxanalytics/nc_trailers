@@ -1,7 +1,6 @@
 -- technician_performance_update.sql
 {{ config(
-	materialized='incremental',
-	post_hook="TRUNCATE TABLE nc_trailers.blackpurl_production.technician_performance_stage;"
+	materialized='incremental'
 ) }}
 
 
