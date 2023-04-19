@@ -1,6 +1,15 @@
 -- technician_performance_update.sql
 {{ config(
-	materialized='incremental'
+	materialized='incremental',
+  pre_hook="DELETE FROM NC_TRAILERS.BLACKPURL_PRODUCTION.TECHNICIAN_PERFORMANCE_STAGE main
+    WHERE EXISTS (
+    SELECT 1
+    FROM NC_TRAILERS.BLACKPURL_PRODUCTION.TECHNICIAN_PERFORMANCE_STAGE sub
+    WHERE COALESCE(TRY_TO_DATE(main.DATE, 'MM/DD/YYYY'), TRY_TO_DATE(main.DATE, 'M/D/YYYY'), TRY_TO_DATE(main.DATE, 'MM-DD-YYYY'), TRY_TO_DATE(main.DATE, 'M-D-YYYY')) = 
+          COALESCE(TRY_TO_DATE(sub.DATE, 'MM/DD/YYYY'), TRY_TO_DATE(sub.DATE, 'M/D/YYYY'), TRY_TO_DATE(sub.DATE, 'MM-DD-YYYY'), TRY_TO_DATE(sub.DATE, 'M-D-YYYY'))
+      AND main.TECHNICIAN = sub.TECHNICIAN
+      AND main._MODIFIED < sub._MODIFIED
+    );"
 ) }}
 
 
