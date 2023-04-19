@@ -4,3 +4,4 @@ sources:
   - name: blackpurl_production
     tables:
       - name: technician_performance_stage
+      - name: technician_performance_update

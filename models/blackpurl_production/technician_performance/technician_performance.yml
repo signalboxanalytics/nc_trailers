@@ -1,6 +1,7 @@
 # technician_performance_update.yml
 version: 2
 
+
 models:
   - name: technician_performance_update
     description: "Update technician_performance table with the latest records from technician_performance_stage"
@@ -17,3 +18,4 @@ models:
         tests:
           - unique
           - not_null
+

@@ -1,7 +1,6 @@
 -- technician_performance_update.sql
 {{ config(
-	materialized='incremental',
-	post_hook="TRUNCATE TABLE nc_trailers.blackpurl_production.technician_performance_stage;"
+	materialized='incremental'
 ) }}
 
 
@@ -10,8 +9,8 @@ SELECT * FROM {{ source('blackpurl_production', 'technician_performance_stage') 
 WHERE s.TECHNICIAN is not null),
 
 prod_prep AS (
-SELECT * FROM {{ this }} as t 
-WHERE t.TECHNICIAN is not null), 
+SELECT * FROM {{ source('blackpurl_production', 'technician_performance_update') }} as p
+WHERE p.TECHNICIAN is not null), 
 
 incremental_data AS (
   SELECT
@@ -27,6 +26,3 @@ incremental_data AS (
   -- Full-refresh logic
   SELECT * FROM stage_prep
 {% endif %}
-
-
-
