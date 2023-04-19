@@ -1,7 +1,7 @@
 -- technician_performance_update.sql
 {{ config(
 	materialized='incremental',
-  pre_hook="DELETE FROM NC_TRAILERS.BLACKPURL_PRODUCTION.TECHNICIAN_PERFORMANCE_UPDATE main;"
+  pre_hook="DELETE FROM {{ source('blackpurl_production', 'technician_performance_update') }};",
 ) }}
 
 
