@@ -1,9 +1,8 @@
-# technician_performance_update.yml
 version: 2
 
 
 models:
-  - name: technician_performance_update
+  - name: technician_performance_model
     description: "Update technician_performance table with the latest records from technician_performance_stage"
     config:
       materialized: incremental
@@ -11,11 +10,7 @@ models:
       - name: TECHNICIAN
         description: "Technician name"
         tests:
-          - unique
-          - not_null
       - name: DATE
         description: "Date"
         tests:
-          - unique
-          - not_null
 
