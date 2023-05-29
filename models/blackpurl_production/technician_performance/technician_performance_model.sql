@@ -33,7 +33,7 @@ WITH stage AS (
         OTHER_TASKS_HRS,
         INVOICED_COST,
         UNINVOICED_COST,
-        COALESCE(TRY_TO_DATE(DATE, 'MM/DD/YYYY'), TRY_TO_DATE(DATE, 'M/D/YYYY'), TRY_TO_DATE(DATE, 'MM-DD-YYYY'), TRY_TO_DATE(DATE, 'M-D-YYYY'), TRY_TO_DATE(DATE, 'YYYY-MM-DD')) AS formatted_date,
+        COALESCE(TRY_TO_DATE(DATE, 'MM/DD/YYYY'), TRY_TO_DATE(DATE, 'M/D/YYYY'), TRY_TO_DATE(DATE, 'MM-DD-YYYY'), TRY_TO_DATE(DATE, 'M-D-YYYY'), TRY_TO_DATE(DATE, 'YYYY-MM-DD')) AS DATE,
         _FIVETRAN_SYNCED
     FROM {{ source('blackpurl_production', 'technician_performance_stage') }}
     WHERE formatted_date is not null and TECHNICIAN is not null
